@@ -1,3 +1,3 @@
-ls 
+ls
 pwd
-cat "how are you"
+cat j.txt
