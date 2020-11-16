@@ -4,7 +4,10 @@ USER_ID=$(id -u)
 
 case $USER_ID in
   0)
-    echo "\e[1;31mYou should be a root user to perform this script\e[0m"
+    echo "Starting Installation"
+  ;;
+  *)
+echo "\e[1;31mYou should be a root user to perform this script\e[0m"
     exit 1
     ;;
 esac
