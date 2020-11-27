@@ -50,7 +50,7 @@ case $1 in
     Print "Starting Nginx"
     systemctl enable nginx
     systemctl restart nginx
-    Status_Check  
+    Status_Check
     ;;
   catalogue)
     echo Installing
@@ -60,4 +60,29 @@ case $1 in
     echo Installing cart
     echo completed Installing cart
     ;;
+  mongodb)
+    echo '[mongodb-org-4.2]
+
+name=MongoDB Repository
+baseurl=https://repo.mongodb.org/yum/redhat/$releasever/mongodb-org/4.2/x86_64/
+gpgcheck=1
+enabled=1
+gpgkey=https://www.mongodb.org/static/pgp/server-4.2.asc' >/etc/yum.repos.d/mongodb.repo
+    Print "Installing MongoDB"
+    yum install -y mongodb-org
+    Status_Check
+    Print "Update MongoDB configuration"
+    sed -i 's/127.0.0.0.1/0.0.0.0' /etc/mongod.conf
+    Status_Check
+    Print "Starting MongoDB service"
+    systemctl enable mongod
+    systemctl start mongod
+    Status_Check
+    ;;
+  *)
+    echo "Invalid Input, Following Inputs are not acceptable"
+    echo "Usage: $0 frontend|catalogue|cart|mongodb "
+    exit 2
+    ;;
+
 esac
