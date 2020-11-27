@@ -50,6 +50,9 @@ Setup_NodeJS () {
  cd /home/roboshop/$1
  unzip -o /tmp/$1.zip
  Status_Check
+ Print "Install NodeJS app dependencies "
+ npm install
+ Status_Check
 }
 
 
