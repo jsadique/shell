@@ -34,9 +34,14 @@ Setup_NodeJS () {
    Print "Installing NodeJS"
    yum install nodejs make gcc-c++ -y
    Status_Check
+   id roboshop
+   case $? in
+   1)
    Print "Add Application user"
    useradd roboshop
    Status_Check
+   ;;
+ esac 
 }
 
 
