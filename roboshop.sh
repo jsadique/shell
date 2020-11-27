@@ -30,6 +30,16 @@ Status_Check() {
     ;;
   esac
 }
+Setup_NodeJS () {
+   Print "Installing NodeJS"
+   yum install nodejs make gcc-c++ -y
+   Status_Check
+   Print "Add Application user"
+   useradd roboshop
+   Status_Check
+}
+
+
 
 #Main Program
 
@@ -54,7 +64,7 @@ case $1 in
     ;;
   catalogue)
     echo Installing
-    echo completed Installing catalogue
+    Setup_NodeJS
     ;;
   cart)
     echo Installing cart
@@ -83,7 +93,7 @@ gpgkey=https://www.mongodb.org/static/pgp/server-4.2.asc' >/etc/yum.repos.d/mong
     Status_Check
     cd /tmp
     Print "Extracting Archive"
-    unzip -o /tmp/mongodb.zip
+    unzip -o /tmp/ mongodb.zip
     Status_Check
     Print "Load Catalogue Schema"
     mongo < catalogue.js
