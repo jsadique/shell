@@ -53,7 +53,17 @@ Setup_NodeJS () {
  Print "Install NodeJS app dependencies "
  npm --unsafe-perm install
  Status_Check
- chown roboshop:roboshop /home/roboshop -R 
+ chown roboshop:roboshop /home/roboshop -R
+ Print " Set up catalogue service"
+  mv /home/roboshop/catalogue/systemd.service /etc/systemd/system/catalogue.service
+  sed -i -e "s/localhost/mongodb.${DNS_DOMAIN_NAME}/" /etc/systemd/system/catalogue.service
+  Print " Start catalogue service"
+  systemctl daemon-reload
+  systemctl enable catalogue
+  systemctl start catalogue
+  Status_Check
+
+
 }
 
 
