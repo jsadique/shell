@@ -28,7 +28,7 @@ Status_Check() {
     echo -e "\e[1;31m********>>>>>> FAILURE >>>>>>****\e[0m"
     exit 3
     ;;
-  esac
+esac
 }
 Setup_NodeJS () {
    Print "Installing NodeJS"
@@ -41,7 +41,8 @@ Setup_NodeJS () {
    useradd roboshop
    Status_Check
    ;;
- esac
+esac
+}
  Print "Downloading Application"
  curl -s -L -o /tmp/$1.zip "$2"
  Status_Check
