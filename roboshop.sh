@@ -42,7 +42,7 @@ Setup_NodeJS () {
    Status_Check
    ;;
 esac
-}
+
  Print "Downloading Application"
  curl -s -L -o /tmp/$1.zip "$2"
  Status_Check
