@@ -86,13 +86,15 @@ case $1 in
     Status_Check
     cd /usr/share/nginx/html
     rm -rf *
+    Print "Extracting frontend Archive"
     unzip /tmp/frontend.zip
     mv static/* .
     rm -rf static README.md
     mv localhost.conf /etc/nginx/nginx.conf
+    sed -i -e '/^#/ d' /etc/nginx/nginx.conf
     Print "Starting Nginx"
     systemctl enable nginx
-    systemctl restart nginx
+    systemctl start nginx
     Status_Check
     ;;
   catalogue)
