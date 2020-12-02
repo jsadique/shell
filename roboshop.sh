@@ -55,14 +55,18 @@ esac
  npm --unsafe-perm install
  Status_Check
  chown roboshop:roboshop /home/roboshop -R
+ Print "Setup $1 Service"
  Print " Set up catalogue service"
-  mv /home/roboshop/catalogue/systemd.service /etc/systemd/system/catalogue.service
-  sed -i -e "s/localhost/mongodb.${DNS_DOMAIN_NAME}/" /etc/systemd/system/catalogue.service
+  mv /home/roboshop/$1/systemd.service /etc/systemd/system/$1.service
+  sed -i -e "s/MONGO_ENDPOINT/mongodb.${DNS_DOMAIN_NAME}/" /etc/systemd/system/$1.service
+  sed -i -e "s/REDIS_ENDPOINT/redis.${DNS_DOMAIN_NAME}/" /etc/systemd/system/$1.service
+  sed -i -e "s/CATALOGUE_ENDPOINT/catalogue.${DNS_DOMAIN_NAME}/" /etc/systemd/system/$1.service
+
   Status_Check
-  Print " Start catalogue service"
+  Print "Start $1 Service"
   systemctl daemon-reload
-  systemctl enable catalogue
-  systemctl start catalogue
+  systemctl enable $1
+  systemctl start $1
   Status_Check
 
 
@@ -103,7 +107,7 @@ case $1 in
     echo Installing User
     Setup_NodeJS "user" "https://dev.azure.com/DevOps-Batches/ce99914a-0f7d-4c46-9ccc-e4d025115ea9/_apis/git/repositories/e911c2cd-340f-4dc6-a688-5368e654397c/items?path=%2F&versionDescriptor%5BversionOptions%5D=0&versionDescriptor%5BversionType%5D=0&versionDescriptor%5Bversion%5D=master&resolveLfs=true&%24format=zip&api-version=5.0&download=true"
     ;;
-  
+
   mongodb)
 
     echo '[mongodb-org-4.2]
